@@ -24,12 +24,14 @@ botname = os.getenv('BOTNAME', default="AeneaBot")
 authuser = os.getenv('AUTHUSER', default="User")
 dbpath = os.getenv('DB_PATH', default="/var/aenea-db")
 loglevel = os.getenv('LOGLEVEL', default="INFO")
+enable_jaeger = os.getenv('ENABLE_JAEGER', default=False)
 
 # Initialize logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=loglevel)
+def log_trace():
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        level=loglevel)
 
-logger = logging.getLogger(__name__)
+    logger = logging.getLogger(__name__)
 
 # Tools
 
@@ -198,7 +200,7 @@ def main():
     """
     Magic
     """
-    
+    log_trace()
     init_persistent_db()
     init_volatile_db()
     bot_routine()
